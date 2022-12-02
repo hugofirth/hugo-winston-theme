@@ -70,13 +70,18 @@
   }
 }
 
+.menu-main-mobile-triggers {
+  display: flex;
+  @include breakpoint('medium') {
+    display: none;
+  }
+}
+
 .hamburger-trigger {
   height: 30px;
   display: flex;
   align-items: center;
-  @include breakpoint('medium') {
-    display: none;
-  }
+  margin-right:10px;
 }
 
 .hamburger {

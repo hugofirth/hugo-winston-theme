@@ -72,6 +72,13 @@ hr {
 
 #toggle-dark-mode {
 	i {
-		-webkit-text-stroke: 1px;
+		font-size: 1.5rem;
+		position: relative;
+                top: 2px;
+                cursor: pointer;
+	}
+	
+	i:hover {
+	   -webkit-text-stroke: 1px;
 	}
 }
