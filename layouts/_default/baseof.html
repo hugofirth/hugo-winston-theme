@@ -35,6 +35,7 @@
 
 {{ $themeStyle := slice "" }}
 {{ if eq .Site.Params.addFrame true }}{{ $themeStyle = $themeStyle | append "frame" }}{{ end }}
+{{ if eq .Site.Params.darkMode true }}{{ $themeStyle = $themeStyle | append "dark-mode" }}{{ end }}
 
 <body class='page{{ delimit $themeStyle " " }} {{ block "body_classes" . }}{{ end }}'>
   {{ partial "menu-main-mobile.html" . }}

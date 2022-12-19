@@ -3,10 +3,13 @@
   --font-family-paragraph: Helvetica, sans-serif;
   --font-family-monospace: monospace;
   --base-color: {{ .Site.Params.baseColor | default "#ffffff" }};
+  --base-color-dark: #121212;
   --base-offset-color: {{ .Site.Params.baseOffsetColor | default "#eaeaea" }};
   --highlight-color: {{ .Site.Params.highlightColor | default "#7b16ff" }};
   --heading-color: {{ .Site.Params.headingColor | default "#1c1b1d" }};
+  --heading-color-dark: #f8f8f8;
   --text-color: {{ .Site.Params.textColor | default "#4e5157" }};
+  --text-color-dark: #f2f2f2; 
   --dot-color: {{ .Site.Params.dotColor | default "#7b16ff" }};
 }
 
@@ -47,6 +50,11 @@ body {
   &.frame {
     min-height: 100vh;
     border: 18px solid var(--highlight-color);
+  }
+
+  &.dark-mode {
+    background: var(--base-color-dark);
+    color: var(--text-color-dark);
   }
 }
 
