@@ -6,6 +6,7 @@ const darkmodeTrigger = document.querySelector('#toggle-dark-mode');
 const darkmodeIcon = document.querySelector('#dark-mode-icon');
 const isDarkMode = localStorage.getItem('darkMode') === 'true' || 
 	(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+const dot = document.querySelector('.dot');
 
 if (isDarkMode) {
   body.classList.add('dark-mode');
@@ -31,9 +32,16 @@ if (darkmodeTrigger !== null) {
     if (added && darkmodeIcon !== null) {
       darkmodeIcon.classList.remove('bi-moon');
       darkmodeIcon.classList.add('bi-sun');
+      // Remove animation class if it exists
+      dot.classList.remove('dot-flicker');
+      // Force reflow to restart animation
+      void dot.offsetWidth;
+      // Add animation class
+      dot.classList.add('dot-flicker');
     } else if(darkmodeIcon !== null) {
       darkmodeIcon.classList.add('bi-moon');
       darkmodeIcon.classList.remove('bi-sun');
+      dot.classList.remove('dot-flicker');
     }
   });
 }

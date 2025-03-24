@@ -129,3 +129,19 @@ hr {
 .dark-mode hr {
   background-color: rgba(245, 242, 230, 0.3);
 }
+
+@keyframes neon-flicker {
+  0%, 100% { opacity: 1; text-shadow: 0 0 10px rgba(43, 224, 255, 0.7); }
+  5% { opacity: 0.3; text-shadow: none; }
+  10% { opacity: 1; text-shadow: 0 0 10px rgba(43, 224, 255, 0.7); }
+  15% { opacity: 0.5; text-shadow: 0 0 5px rgba(43, 224, 255, 0.4); }
+  25% { opacity: 1; text-shadow: 0 0 10px rgba(43, 224, 255, 0.7); }
+  30% { opacity: 0.8; text-shadow: 0 0 5px rgba(43, 224, 255, 0.4); }
+  35% { opacity: 1; text-shadow: 0 0 12px rgba(43, 224, 255, 0.8); }
+  40% { opacity: 0.7; text-shadow: 0 0 3px rgba(43, 224, 255, 0.3); }
+  45% { opacity: 1; text-shadow: 0 0 14px rgba(43, 224, 255, 0.9); }
+}
+
+.dot-flicker {
+  animation: neon-flicker 1.5s ease-in-out;
+}
