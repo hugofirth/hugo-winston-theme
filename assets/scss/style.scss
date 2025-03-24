@@ -90,3 +90,42 @@ hr {
 	   -webkit-text-stroke: 1px;
 	}
 }
+
+/* Neon glow effect for dark mode */
+.dark-mode a {
+  color: #2be0ff; /* Brighter cyan/blue color */
+  text-shadow: 0 0 8px rgba(43, 224, 255, 0.6);
+  transition: all 0.2s ease;
+}
+
+.dark-mode a:hover {
+  color: #5eeaff;
+  text-shadow: 0 0 12px rgba(94, 234, 255, 0.8), 0 0 18px rgba(94, 234, 255, 0.5);
+}
+
+.dark-mode .summary-title a:hover {
+  color: #5eeaff;
+  text-shadow: 0 0 10px rgba(94, 234, 255, 0.6);
+}
+
+.dark-mode .dot {
+  color: #2be0ff;
+  text-shadow: 0 0 10px rgba(43, 224, 255, 0.7);
+}
+
+.dark-mode .highlight-icon {
+  color: #2be0ff;
+  filter: drop-shadow(0 0 6px rgba(43, 224, 255, 0.7));
+}
+
+.dark-mode h1, .dark-mode h2, .dark-mode h3 {
+  text-shadow: 0 0 2px rgba(248, 248, 248, 0.2);
+}
+
+.dark-mode .summary-date {
+  color: #f2f2f2
+}
+
+.dark-mode hr {
+  background-color: rgba(245, 242, 230, 0.3);
+}
