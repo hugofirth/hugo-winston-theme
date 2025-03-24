@@ -54,9 +54,10 @@
   {{ $js := slice $scripts | resources.Concat "js/bundle.js" }}
 
   {{ if hugo.IsServer }}
-  <script type="text/javascript" src="{{ $js.RelPermalink }}"></script>
+  <script type="text/javascript" src="{{ $js.RelPermalink }}" defer></script>
   {{ else }}
-  <script type="text/javascript" src="{{ ($js | minify | fingerprint).RelPermalink }}"></script>
+  <script type="text/javascript" src="{{ ($js | minify |
+    fingerprint).RelPermalink }}" defer></script>
   {{ end }}
 
   {{ block "footer_js" . }}
