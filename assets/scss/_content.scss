@@ -162,6 +162,11 @@ ul {
 
 .dot {
   color: var(--dot-color);
+  position: relative;
+  display: inline-block;
+  padding: 0 5px;
+  margin: 0 -5px;
+  overflow: visible;
 }
 
 .footnotes {

@@ -3,7 +3,7 @@
   --font-family-paragraph: Helvetica, sans-serif;
   --font-family-monospace: monospace;
   --base-color: {{ .Site.Params.baseColor | default "#ffffff" }};
-  --base-color-dark: #121212;
+  --base-color-dark: rgb(30,30,30);
   --base-offset-color: {{ .Site.Params.baseOffsetColor | default "#eaeaea" }};
   --highlight-color: {{ .Site.Params.highlightColor | default "#7b16ff" }};
   --heading-color: {{ .Site.Params.headingColor | default "#1c1b1d" }};
@@ -111,6 +111,11 @@ hr {
 .dark-mode .dot {
   color: #2be0ff;
   text-shadow: 0 0 10px rgba(43, 224, 255, 0.7);
+  position: relative;
+  display: inline-block;
+  padding: 0 5px;
+  overflow: visible;
+  z-index: 1;
 }
 
 .dark-mode .highlight-icon {
@@ -123,7 +128,7 @@ hr {
 }
 
 .dark-mode .summary-date {
-  color: #f2f2f2
+  color: #f2f2f2;
 }
 
 .dark-mode hr {
@@ -131,17 +136,46 @@ hr {
 }
 
 @keyframes neon-flicker {
-  0%, 100% { opacity: 1; text-shadow: 0 0 10px rgba(43, 224, 255, 0.7); }
+  0%, 100% { opacity: 1; text-shadow: 0 0 10px rgba(43, 224, 255, 0.7), 0 0 15px rgba(43, 224, 255, 0.5), 0 0 20px rgba(43, 224, 255, 0.3); }
   5% { opacity: 0.3; text-shadow: none; }
-  10% { opacity: 1; text-shadow: 0 0 10px rgba(43, 224, 255, 0.7); }
+  10% { opacity: 1; text-shadow: 0 0 10px rgba(43, 224, 255, 0.7), 0 0 15px rgba(43, 224, 255, 0.5); }
   15% { opacity: 0.5; text-shadow: 0 0 5px rgba(43, 224, 255, 0.4); }
-  25% { opacity: 1; text-shadow: 0 0 10px rgba(43, 224, 255, 0.7); }
+  25% { opacity: 1; text-shadow: 0 0 10px rgba(43, 224, 255, 0.7), 0 0 18px rgba(43, 224, 255, 0.4); }
   30% { opacity: 0.8; text-shadow: 0 0 5px rgba(43, 224, 255, 0.4); }
-  35% { opacity: 1; text-shadow: 0 0 12px rgba(43, 224, 255, 0.8); }
+  35% { opacity: 1; text-shadow: 0 0 12px rgba(43, 224, 255, 0.8), 0 0 20px rgba(43, 224, 255, 0.4); }
   40% { opacity: 0.7; text-shadow: 0 0 3px rgba(43, 224, 255, 0.3); }
-  45% { opacity: 1; text-shadow: 0 0 14px rgba(43, 224, 255, 0.9); }
+  45% { opacity: 1; text-shadow: 0 0 14px rgba(43, 224, 255, 0.9), 0 0 22px rgba(43, 224, 255, 0.6); }
 }
 
 .dot-flicker {
   animation: neon-flicker 1.5s ease-in-out;
+  will-change: text-shadow, opacity;
+  transform: translateZ(0);
+}
+
+.social-icon {
+  margin-right: 10px;
+  svg {
+    width: 24px;
+    height: 24px;
+    color: var(--text-color);
+    transition: color 0.2s ease, opacity 0.2s ease;
+  }
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+      svg {
+        opacity: 0.7;
+      }
+    }
+  }
+}
+
+.dark-mode {
+  .social-icon {
+    svg {
+      color: var(--text-color-dark);
+    }
+  }
 }
