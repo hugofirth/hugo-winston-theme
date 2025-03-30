@@ -1,47 +1,69 @@
-const body = document.querySelector('body');
-const menuTrigger = document.querySelector('#toggle-menu-main-mobile');
-const menuContainer = document.querySelector('#menu-main-mobile');
-const hamburgerIcon = document.querySelector('.hamburger');
-const darkmodeTrigger = document.querySelector('#toggle-dark-mode');
-const darkmodeIcon = document.querySelector('#dark-mode-icon');
-const isDarkMode = localStorage.getItem('darkMode') === 'true' || 
-	(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
-const dot = document.querySelector('.dot');
+// DOM Elements
+const elements = {
+  body: document.querySelector('body'),
+  menuTrigger: document.querySelector('#toggle-menu-main-mobile'),
+  menuContainer: document.querySelector('#menu-main-mobile'),
+  hamburger: document.querySelector('.hamburger'),
+  darkModeTrigger: document.querySelector('#toggle-dark-mode'),
+  darkModeIcon: document.querySelector('#dark-mode-icon'),
+  dot: document.querySelector('.dot')
+};
 
-if (isDarkMode) {
-  body.classList.add('dark-mode');
-  darkmodeIcon.classList.remove('bi-moon');
-  darkmodeIcon.classList.add('bi-sun');
-} else {
-  body.classList.remove('dark-mode');
-  darkmodeIcon.classList.remove('bi-sun');
-  darkmodeIcon.classList.add('bi-moon');
-}
+// Dark mode utilities
+const darkMode = {
+  getSystemPreference: () => 
+    window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches,
+  
+  getStoredPreference: () => {
+    const stored = localStorage.getItem('darkMode');
+    return stored !== null ? stored === 'true' : null;
+  },
 
-if (menuTrigger !== null) {
-  menuTrigger.addEventListener('click', function(e) {
-    menuContainer.classList.toggle('open');
-    hamburgerIcon.classList.toggle('is-active');
-    body.classList.toggle('lock-scroll');
+  updateUI: (isDark) => {
+    const { body, darkModeIcon, dot } = elements;
+    
+    if (isDark) {
+      body.classList.add('dark-mode');
+      darkModeIcon?.classList.remove('bi-moon');
+      darkModeIcon?.classList.add('bi-sun');
+    } else {
+      body.classList.remove('dark-mode');
+      darkModeIcon?.classList.remove('bi-sun');
+      darkModeIcon?.classList.add('bi-moon');
+    }
+  },
+
+  toggleAnimation: () => {
+    const { dot } = elements;
+    if (!dot) return;
+    
+    dot.classList.remove('dot-flicker');
+    // Force reflow to restart animation
+    void dot.offsetWidth;
+    dot.classList.add('dot-flicker');
+  }
+};
+
+// Initialize dark mode
+const isDarkMode = darkMode.getStoredPreference() ?? darkMode.getSystemPreference();
+darkMode.updateUI(isDarkMode);
+
+// Event Listeners
+if (elements.menuTrigger && elements.menuContainer && elements.hamburger) {
+  elements.menuTrigger.addEventListener('click', () => {
+    elements.menuContainer.classList.toggle('open');
+    elements.hamburger.classList.toggle('is-active');
+    elements.body.classList.toggle('lock-scroll');
   });
 }
 
-if (darkmodeTrigger !== null) {
-  darkmodeTrigger.addEventListener('click', function(e) {
-    const added = body.classList.toggle('dark-mode');
-    if (added && darkmodeIcon !== null) {
-      darkmodeIcon.classList.remove('bi-moon');
-      darkmodeIcon.classList.add('bi-sun');
-      // Remove animation class if it exists
-      dot.classList.remove('dot-flicker');
-      // Force reflow to restart animation
-      void dot.offsetWidth;
-      // Add animation class
-      dot.classList.add('dot-flicker');
-    } else if(darkmodeIcon !== null) {
-      darkmodeIcon.classList.add('bi-moon');
-      darkmodeIcon.classList.remove('bi-sun');
-      dot.classList.remove('dot-flicker');
+if (elements.darkModeTrigger) {
+  elements.darkModeTrigger.addEventListener('click', () => {
+    const isDark = elements.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', isDark);
+    darkMode.updateUI(isDark);
+    if (isDark) {
+      darkMode.toggleAnimation();
     }
   });
 }
