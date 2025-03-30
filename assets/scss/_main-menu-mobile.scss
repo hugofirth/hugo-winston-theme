@@ -54,6 +54,7 @@
         position: relative;
         color: var(--base-color);
         text-decoration: none;
+        white-space: nowrap;
         &:hover {
           opacity: 0.7;
         }
