@@ -4,8 +4,9 @@ const elements = {
   menuTrigger: document.querySelector('#toggle-menu-main-mobile'),
   menuContainer: document.querySelector('#menu-main-mobile'),
   hamburger: document.querySelector('.hamburger'),
-  darkModeTrigger: document.querySelector('#toggle-dark-mode'),
-  darkModeIcon: document.querySelector('#dark-mode-icon'),
+  darkModeToggles: document.querySelectorAll('.dark-mode-toggle'),
+  darkModeIconDesktop: document.querySelector('#dark-mode-icon-desktop'),
+  darkModeIconMobile: document.querySelector('#dark-mode-icon-mobile'),
   dot: document.querySelector('.dot')
 };
 
@@ -20,16 +21,20 @@ const darkMode = {
   },
 
   updateUI: (isDark) => {
-    const { body, darkModeIcon, dot } = elements;
+    const { body, darkModeIconDesktop, darkModeIconMobile, dot } = elements;
     
     if (isDark) {
       body.classList.add('dark-mode');
-      darkModeIcon?.classList.remove('bi-moon');
-      darkModeIcon?.classList.add('bi-sun');
+      darkModeIconDesktop?.classList.remove('bi-moon');
+      darkModeIconDesktop?.classList.add('bi-sun');
+      darkModeIconMobile?.classList.remove('bi-moon');
+      darkModeIconMobile?.classList.add('bi-sun');
     } else {
       body.classList.remove('dark-mode');
-      darkModeIcon?.classList.remove('bi-sun');
-      darkModeIcon?.classList.add('bi-moon');
+      darkModeIconDesktop?.classList.remove('bi-sun');
+      darkModeIconDesktop?.classList.add('bi-moon');
+      darkModeIconMobile?.classList.remove('bi-sun');
+      darkModeIconMobile?.classList.add('bi-moon');
     }
   },
 
@@ -57,8 +62,9 @@ if (elements.menuTrigger && elements.menuContainer && elements.hamburger) {
   });
 }
 
-if (elements.darkModeTrigger) {
-  elements.darkModeTrigger.addEventListener('click', () => {
+// Add click event listeners to all dark mode toggles
+elements.darkModeToggles.forEach(toggle => {
+  toggle.addEventListener('click', () => {
     const isDark = elements.body.classList.toggle('dark-mode');
     localStorage.setItem('darkMode', isDark);
     darkMode.updateUI(isDark);
@@ -66,5 +72,5 @@ if (elements.darkModeTrigger) {
       darkMode.toggleAnimation();
     }
   });
-}
+});
 
