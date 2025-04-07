@@ -6,6 +6,9 @@
     {{ if .Params.description }}<p>{{ .Params.description }}</p>{{ end }}
   </div>
   {{ .Content }}
+  
+  {{ partial "tag-pills.html" . }}
+  
   {{ range .Pages }}
     {{ .Render "summary" }}
   {{ end }}
