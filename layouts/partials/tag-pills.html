@@ -1,0 +1,18 @@
+
+{{- $pages := where .Site.RegularPages "Section" "learning-log-entry" -}}
+{{ $tags := slice }}
+{{ range $pages }}
+    {{ range .tags }}
+        {{ $tags = $tags | append . }}
+    {{ end }}
+{{ end }}
+{{ $tags = $tags | uniq }}
+
+<div class="tag-pills">
+    {{ range $tags }}
+        {{ $color := printf "hsl(%d, 70%%, 80%%)" (mul (mod (add (mul (len .) 13) 7) 360) 1) }}
+        <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag-pill" style="background-color: {{ $color }}">
+            {{ . }}
+        </a>
+    {{ end }}
+</div>

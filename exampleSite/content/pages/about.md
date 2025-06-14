@@ -2,6 +2,7 @@
 title: 'About'
 image: images/writer.jpeg
 url: "about"
+draft: true
 menu:
   main:
     name: "About"
