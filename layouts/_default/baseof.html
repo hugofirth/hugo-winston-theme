@@ -21,6 +21,9 @@
   {{ end }}
   {{ $calHeatmapStyle := resources.Get "css/calendar-heatmap.min.css" }}
   <link rel="stylesheet" href="{{($calHeatmapStyle).RelPermalink}}">
+  
+  {{ $customStyle := resources.Get "scss/custom.scss" | toCSS (dict "targetPath" "css/custom.css") }}
+  <link rel="stylesheet" href="{{ $customStyle.RelPermalink }}">
 
   {{ block "meta_tags" . }}
     {{ if .Params.description }}<meta name="description" content="{{ .Params.description }}"/>{{ end }}
