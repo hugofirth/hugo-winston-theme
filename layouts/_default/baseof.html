@@ -19,8 +19,7 @@
     {{ $style := resources.Get "scss/style.scss" | resources.ExecuteAsTemplate "style.scss" . | toCSS (dict "targetPath" "css/style.css" "enableSourceMap" false) }}
     <link rel="stylesheet" href="{{ ($style | minify | fingerprint).RelPermalink }}">
   {{ end }}
-  {{ $calHeatmapStyle := resources.Get "css/calendar-heatmap.min.css" }}
-  <link rel="stylesheet" href="{{($calHeatmapStyle).RelPermalink}}">
+  <link rel="stylesheet" href="https://unpkg.com/cal-heatmap/dist/cal-heatmap.css">
   
   {{ $customStyle := resources.Get "scss/custom.scss" | toCSS (dict "targetPath" "css/custom.css") }}
   <link rel="stylesheet" href="{{ $customStyle.RelPermalink }}">
@@ -55,15 +54,13 @@
   </div>
 
   {{ $jsFiles := slice }}
-  {{ with resources.Get "js/calendar-heatmap.min.js" }}{{ $jsFiles = $jsFiles | append . }}{{ end }}
   {{ with resources.Get "js/scripts.js" }}{{ $jsFiles = $jsFiles | append . }}{{ end }}
   {{ with resources.Get "js/custom.js" }}{{ $jsFiles = $jsFiles | append . }}{{ end }}
 
   {{ $js := $jsFiles | resources.Concat "js/bundle.js" }}
 
-  <!--TODO: depend on d3 and moment properly -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" charset="utf-8" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.10.2/d3.min.js" charset="utf-8" defer></script>
+  <script src="https://d3js.org/d3.v7.min.js" charset="utf-8" defer></script>
+  <script src="https://unpkg.com/cal-heatmap/dist/cal-heatmap.min.js" charset="utf-8" defer></script>
   {{ if hugo.IsServer }}
   <script type="text/javascript" src="{{ $js.RelPermalink }}" defer></script>
   {{ else }}
